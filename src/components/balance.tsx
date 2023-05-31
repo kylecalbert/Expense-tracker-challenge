@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, CardContent, Typography } from '@mui/material';
 
 // //Money formatter function
 // function moneyFormatter(num) {
@@ -29,7 +30,6 @@ import React from 'react';
 //     </>
 //   )
 // }
-import { Card, CardContent, Typography } from '@mui/material';
 
 interface HistoryCardProps{
   title:string 
