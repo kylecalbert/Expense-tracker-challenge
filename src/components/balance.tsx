@@ -29,3 +29,29 @@ import React from 'react';
 //     </>
 //   )
 // }
+import { Card, CardContent, Typography } from '@mui/material';
+
+interface HistoryCardProps{
+  title:string 
+  price:number,
+
+}
+
+const HistoryCard: React.FC<HistoryCardProps> = ({ title, price }) => {
+  return (
+    <Card sx={{ backgroundColor: '#ffffff', display: 'flex', justifyContent: 'space-between' }}>
+      <CardContent>
+        <Typography variant="h6" component="div">
+          {title}
+        </Typography>
+      </CardContent>
+      <CardContent>
+        <Typography variant="h6" component="div" align="right">
+          {price}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default HistoryCard;
