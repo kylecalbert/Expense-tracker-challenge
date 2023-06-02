@@ -4,7 +4,7 @@ import HistoryCards from './HistoryCards';
 const HistoryCardGrid = () => {
   const cards = [
     { id: 1, title: 'Camera', price: 10 },
-    { id: 2, title: 'Mobile phone ', price: 30 },
+    { id: 2, title: 'Mobile phone', price: 30 },
     { id: 3, title: 'Cake ', price: 30 },
     { id: 3, title: 'Cash', price: 30 },
   ];
