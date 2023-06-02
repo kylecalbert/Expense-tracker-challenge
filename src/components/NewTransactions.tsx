@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import {
   TextField,
   Box,
@@ -9,42 +9,32 @@ import {
   FormControlLabel,
   Radio,
 } from '@mui/material';
-
-interface FormData {
-  title: string;
-  amount: string;
-  type: string;
-}
-
-interface FormDataErrors {
-  titleError: string;
-  amountError: string;
-  typeError: string;
-}
+import { ExpenseTrackerContext } from './TrackerProvider';
 
 const NewTransactions = () => {
-  const [formData, setFormData] = useState<FormData>({
-    title: '',
-    amount: '',
-    type: '',
-  });
+  const expenseContext = useContext(ExpenseTrackerContext);
+  if (!expenseContext) {
+    return null;
+  }
 
-  const [formDataErrors, setFormDataErrors] = useState<FormDataErrors>({
-    titleError: '',
-    amountError: '',
-    typeError: '',
-  });
+  const {
+    expenseTrackerData,
+    setExpenseTrackerData,
+    expenseTrackerErrors,
+    setExpenseTrackerErrors,
+  } = expenseContext;
+
+  const { title, amount, type } = expenseTrackerData;
+  const { titleError, amountError, typeError } = expenseTrackerErrors;
 
   const handleAddTransaction = () => {
-    if (!formData.title || !formData.amount || !formData.type) {
-      if (!formData.title) {
-        setFormDataErrors({
-          ...formDataErrors,
-          titleError: 'Title is required',
-          amountError: 'Amount is required',
-          typeError: 'Please select Income or Expense',
-        });
-      }
+    if (!title || !amount || !type) {
+      setExpenseTrackerErrors({
+        ...expenseTrackerErrors,
+        titleError: title ? '' : 'Title is required',
+        amountError: amount ? '' : 'Amount is required',
+        typeError: type ? '' : 'Please select Income or Expense',
+      });
 
       return false;
     }
@@ -55,8 +45,8 @@ const NewTransactions = () => {
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (inputValue === '' || /^\d+$/.test(inputValue)) {
-      setFormData({ ...formData, amount: inputValue });
-      setFormDataErrors({ ...formDataErrors, amountError: '' });
+      setExpenseTrackerData({ ...expenseTrackerData, amount: inputValue });
+      setExpenseTrackerErrors({ ...expenseTrackerErrors, amountError: '' });
     }
   };
 
@@ -64,29 +54,32 @@ const NewTransactions = () => {
     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
       <Typography>Enter the title</Typography>
       <TextField
-        error={Boolean(formDataErrors.titleError)}
-        helperText={formDataErrors.titleError}
+        error={Boolean(titleError)}
+        helperText={titleError}
         placeholder="please enter the title"
         label="title"
         margin="normal"
         variant="outlined"
-        value={formData.title}
+        value={title}
         onChange={(e) => {
-          setFormData({ ...formData, title: e.target.value });
-          setFormDataErrors({ ...formDataErrors, titleError: '' });
+          setExpenseTrackerData({
+            ...expenseTrackerData,
+            title: e.target.value,
+          });
+          setExpenseTrackerErrors({ ...expenseTrackerErrors, titleError: '' });
         }}
         style={{ width: 500 }}
       />
 
       <Typography>Enter the amount</Typography>
       <TextField
-        error={Boolean(formDataErrors.amountError)}
-        helperText={formDataErrors.amountError}
+        error={Boolean(amountError)}
+        helperText={amountError}
         placeholder="please enter the amount"
         label="amount"
         margin="normal"
         variant="outlined"
-        value={formData.amount}
+        value={amount}
         onChange={handleAmountChange}
         style={{ width: 500 }}
       />
@@ -106,10 +99,16 @@ const NewTransactions = () => {
             defaultValue="income"
             name="radio-buttons-group"
             sx={{ flexDirection: 'row' }}
-            value={formData.type}
+            value={type}
             onChange={(e) => {
-              setFormData({ ...formData, type: e.target.value });
-              setFormDataErrors({ ...formDataErrors, typeError: '' });
+              setExpenseTrackerData({
+                ...expenseTrackerData,
+                type: e.target.value,
+              });
+              setExpenseTrackerErrors({
+                ...expenseTrackerErrors,
+                typeError: '',
+              });
             }}
           >
             <FormControlLabel
@@ -123,9 +122,7 @@ const NewTransactions = () => {
               label="Expense"
             />
           </RadioGroup>
-          {formDataErrors.typeError && (
-            <Typography color="error">{formDataErrors.typeError}</Typography>
-          )}
+          {typeError && <Typography color="error">{typeError}</Typography>}
         </FormControl>
 
         <Button
