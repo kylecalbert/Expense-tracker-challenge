@@ -5,6 +5,6 @@ export const Header: React.FC = () => {
   return (
     <Typography variant="h2" component="div">
       Expense Tracker
-    </Typeography>
+    </Typography>
   );
 };

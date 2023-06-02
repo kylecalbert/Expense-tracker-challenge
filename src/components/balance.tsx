@@ -20,7 +20,7 @@ const Balance: React.FC<BalanceProps> = ({ transactions }) => {
 
   return (
     <Box>
-      <BalanceText>Balance: ₹{total}</BalanceText>
+      <BalanceText>Balance: £{total}</BalanceText>
     </Box>
   );
 };
