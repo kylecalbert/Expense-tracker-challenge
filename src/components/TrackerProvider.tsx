@@ -1,46 +1,57 @@
 import React, { createContext, useState } from 'react';
 
-interface FormData {
+interface ExpenseTrackerData {
   title: string;
   amount: string;
   type: string;
 }
-interface FormDataErrors {
+interface expenseTrackerErrors {
   titleError: string;
   amountError: string;
   typeError: string;
 }
 
-interface FormContextData {
-  formData: FormData;
-  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
-  formDataErrors: FormDataErrors;
-  setFormDataErrors: React.Dispatch<React.SetStateAction<FormDataErrors>>;
+interface ExpenseContextData {
+  expenseTrackerData: ExpenseTrackerData;
+  setExpenseTrackerData: React.Dispatch<
+    React.SetStateAction<ExpenseTrackerData>
+  >;
+  expenseTrackerErrors: expenseTrackerErrors;
+  setExpenseTrackerErrors: React.Dispatch<
+    React.SetStateAction<expenseTrackerErrors>
+  >;
 }
 
-export const FormContext = createContext<FormContextData | undefined>(
-  undefined
-);
+export const ExpenseTrackerContext = createContext<
+  ExpenseContextData | undefined
+>(undefined);
 
-export const FormProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [formData, setFormData] = useState<FormData>({
-    title: '',
-    amount: '',
-    type: '',
-  });
-  const [formDataErrors, setFormDataErrors] = useState<FormDataErrors>({
-    titleError: '',
-    amountError: '',
-    typeError: '',
-  });
+export const ExpenseTrackerProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  const [expenseTrackerData, setExpenseTrackerData] =
+    useState<ExpenseTrackerData>({
+      title: '',
+      amount: '',
+      type: '',
+    });
+  const [expenseTrackerErrors, setExpenseTrackerErrors] =
+    useState<expenseTrackerErrors>({
+      titleError: '',
+      amountError: '',
+      typeError: '',
+    });
 
   return (
-    <FormContext.Provider
-      value={{ formData, setFormData, formDataErrors, setFormDataErrors }}
+    <ExpenseTrackerContext.Provider
+      value={{
+        expenseTrackerData,
+        setExpenseTrackerData,
+        expenseTrackerErrors,
+        setExpenseTrackerErrors,
+      }}
     >
       {children}
-    </FormContext.Provider>
+    </ExpenseTrackerContext.Provider>
   );
 };
