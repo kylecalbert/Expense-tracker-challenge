@@ -1,12 +1,27 @@
 import React from 'react';
-
+import { Header } from './header';
+import Balance from './balance';
+import { IncomeExpenses } from './incomeExpenses';
 import NewTransactions from './NewTransactions';
 import HistoryCardGrid from './HistoryCardGrid';
 import { Box } from '@mui/material';
 
 const ExpenseTracker = () => {
+  const transactions = [
+    { amount: 100 },
+    { amount: 50 }
+  ]
+
   return (
+
     <Box>
+        <Header/>
+      <Box>
+        <Balance transactions = {transactions}/>
+      </Box>
+      <Box>
+        <IncomeExpenses/>
+      </Box>
       <Box
         sx={{
           display: 'flex',

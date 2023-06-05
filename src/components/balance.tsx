@@ -1,31 +1,45 @@
 import React from 'react';
+import { Typography, styled, Box, Card, CardContent } from '@mui/material';
 
-// //Money formatter function
-// function moneyFormatter(num) {
-//   let p = num.toFixed(2).split('.');
+const BalanceText = styled(Typography)`
+  font-size: 25px;
+  margin-bottom: 20px;
+`;
+
+interface Transaction {
+  amount: number;
+}
+
+interface BalanceProps {
+  transactions: Transaction[];
+}
+
+const Balance: React.FC<BalanceProps> = ({ transactions }) => {
+  const amount = transactions.map((transaction) => transaction.amount);
+  const total = amount.reduce((amount, item) => (amount += item), 0).toFixed(2);
+
+  return (
+    <Box>
+      <BalanceText>Balance: £{total}</BalanceText>
+    </Box>
+  );
+};
+
+export default Balance;
+
+// const BalanceCard: React.FC = () => {
 //   return (
-//     '$ ' + (p[0].split('')[0]=== '-' ? '-' : '') +
-//     p[0]
-//       .split('')
-//       .reverse()
-//       .reduce(function (acc, num, i, orig) {
-//         return num === '-' ? acc : num + (i && !(i % 3) ? ',' : '') + acc;
-//       }, '') +
-//     '.' +
-//     p[1]
+//     <Card>
+//       <CardContent>
+//         <Typography variant="h5" component="div">
+//           Income
+//         </Typography>
+//         <Typography variant="body2" color="text.secondary">
+//           Expense
+//         </Typography>
+//       </CardContent>
+//     </Card>
 //   );
-// }
+// };
 
-// export const Balance = () => {
-
-//   const amounts = transactions.map(transaction => transaction.amount);
-
-//   const total = amounts.reduce((acc, item) => (acc += item), 0);
-
-//   return (
-//     <>
-//       <h4>Your Balance</h4>
-//     <h1>{moneyFormatter(total)}</h1>
-//     </>
-//   )
-// }
+// export default BalanceCard;

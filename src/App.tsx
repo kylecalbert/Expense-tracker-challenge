@@ -1,6 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Box } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import './App.css';
 import Login from './components/Login';
 import {
@@ -12,6 +11,20 @@ import {
 } from 'react-router-dom';
 import { ExpenseTrackerProvider } from './components/TrackerProvider';
 import ExpenseTracker from './components/ExpenseTracker';
+
+const Component = styled(Box)`
+  background: #FFF;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex;
+  width: 800px;
+  & > div {
+    padding: 10px;
+    width: 50%;
+    height: 70vh;
+  }
+}
+`;
 
 function App() {
   const handleFormSubmit = (loginData: any) => {
