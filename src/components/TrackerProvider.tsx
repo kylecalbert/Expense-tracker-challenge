@@ -11,6 +11,10 @@ interface expenseTrackerErrors {
   typeError: string;
 }
 
+interface expenseTrackerStorage {
+  storage: ExpenseTrackerData[];
+}
+
 interface ExpenseContextData {
   expenseTrackerData: ExpenseTrackerData;
   setExpenseTrackerData: React.Dispatch<
@@ -19,6 +23,11 @@ interface ExpenseContextData {
   expenseTrackerErrors: expenseTrackerErrors;
   setExpenseTrackerErrors: React.Dispatch<
     React.SetStateAction<expenseTrackerErrors>
+  >;
+
+  expenseTrackerStorage: expenseTrackerStorage;
+  setExpenseTrackerStorage: React.Dispatch<
+    React.SetStateAction<expenseTrackerStorage>
   >;
 }
 
@@ -42,6 +51,11 @@ export const ExpenseTrackerProvider: React.FC<{
       typeError: '',
     });
 
+  const [expenseTrackerStorage, setExpenseTrackerStorage] =
+    useState<expenseTrackerStorage>({
+      storage: [],
+    });
+
   return (
     <ExpenseTrackerContext.Provider
       value={{
@@ -49,6 +63,8 @@ export const ExpenseTrackerProvider: React.FC<{
         setExpenseTrackerData,
         expenseTrackerErrors,
         setExpenseTrackerErrors,
+        expenseTrackerStorage,
+        setExpenseTrackerStorage,
       }}
     >
       {children}

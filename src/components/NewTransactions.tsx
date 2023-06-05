@@ -18,10 +18,12 @@ const NewTransactions = () => {
   }
 
   const {
-    expenseTrackerData,
-    setExpenseTrackerData,
-    expenseTrackerErrors,
-    setExpenseTrackerErrors,
+    expenseTrackerData, // Temporary Data container for the a new transaction that user wants to add (title, amount, type)
+    setExpenseTrackerData, // Function to update the expenseTrackerData
+    setExpenseTrackerStorage,
+    expenseTrackerStorage, //  used to store the temprary data which can be saved and retained in the history section.
+    expenseTrackerErrors, // Errors related to the new transaction inputs
+    setExpenseTrackerErrors, // Function to update the expenseTrackerErrors
   } = expenseContext;
 
   const { title, amount, type } = expenseTrackerData;
@@ -29,6 +31,7 @@ const NewTransactions = () => {
 
   const handleAddTransaction = () => {
     if (!title || !amount || !type) {
+      // Checking if any of the required fields (title, amount, type) is missing
       setExpenseTrackerErrors({
         ...expenseTrackerErrors,
         titleError: title ? '' : 'Title is required',
@@ -36,11 +39,19 @@ const NewTransactions = () => {
         typeError: type ? '' : 'Please select Income or Expense',
       });
 
-      return false;
+      return false; // Return false to prevent adding the transaction
     }
+
+    //adding the new transaction the user has entered to the storage so it can be stored in history card section.
+    setExpenseTrackerStorage((previousStorage) => ({
+      ...previousStorage,
+      storage: [...previousStorage.storage, expenseTrackerData],
+    }));
 
     alert('Transaction added successfully');
   };
+
+  console.log(expenseTrackerStorage);
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;

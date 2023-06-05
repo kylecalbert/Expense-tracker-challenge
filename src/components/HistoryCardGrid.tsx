@@ -7,6 +7,10 @@ const HistoryCardGrid = () => {
     { id: 2, title: 'Mobile phone', price: 30 },
     { id: 3, title: 'Cake ', price: 30 },
     { id: 3, title: 'Cash', price: 30 },
+    { id: 3, title: 'Cake ', price: 30 },
+    { id: 3, title: 'Cash', price: 30 },
+    { id: 3, title: 'Cake ', price: 30 },
+    { id: 3, title: 'Cash', price: 30 },
   ];
 
   return (
