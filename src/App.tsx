@@ -12,10 +12,10 @@ import {
 } from 'react-router-dom';
 import { ExpenseTrackerProvider } from './components/TrackerProvider';
 import ExpenseTracker from './components/ExpenseTracker';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
   const handleFormSubmit = (loginData: any) => {
-    // Handle the form submit logic here
     console.log(loginData);
   };
   const router = createBrowserRouter(
