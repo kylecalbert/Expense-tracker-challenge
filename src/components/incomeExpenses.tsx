@@ -1,7 +1,14 @@
 import React from 'react';
-import { Typography, Box, } from '@mui/material';
+import { Typography, Box, styled, Card, CardContent} from '@mui/material';
 // import { GlobalContext } from '../context/GlobalState';
 
+const Container = styled(Box)`
+    display: flex;
+    & > div {
+        flex: 1;
+        padding: 10px;
+    }
+`;
 //Money formatter function
 function moneyFormatter(num: number): string {
     let p = num.toFixed(2).split('.');
@@ -21,27 +28,31 @@ function moneyFormatter(num: number): string {
   export const IncomeExpenses: React.FC = () => {
     // const { transactions } = useContext(GlobalContext);
   
-    const amounts = transactions.map((transaction) => transaction.amount);
+    // const amounts = transactions.map((transaction) => transaction.amount);
   
-    const income = amounts
-      .filter((item) => item > 0)
-      .reduce((acc, item) => (acc += item), 0);
+    // const income = amounts
+    //   .filter((item) => item > 0)
+    //   .reduce((acc, item) => (acc += item), 0);
   
-    const expense =
-      amounts
-        .filter((item) => item < 0)
-        .reduce((acc, item) => (acc += item), 0) * -1;
+    // const expense =
+    //   amounts
+    //     .filter((item) => item < 0)
+    //     .reduce((acc, item) => (acc += item), 0) * -1;
   
         return (
-            <Box className="inc-exp-container">
-              <Box>
-                <Typography variant="h4">Income</Typography>
-                <Typography className="money plus">{moneyFormatter(income)}</Typography>
-              </Box>
-              <Box>
-                <Typography variant="h4">Expense</Typography>
-                <Typography className="money minus">{moneyFormatter(expense)}</Typography>
-              </Box>
-            </Box>
+          <Container>
+          <Card>
+              <CardContent>
+                  <Typography>Income</Typography>
+                  {/* <Typography style={{ color: 'green' }}>+₹{income}</Typography> */}
+              </CardContent>
+          </Card>
+          <Card>
+              <CardContent>
+                  <Typography>Expense</Typography>
+                  {/* <Typography style={{ color: 'red' }}>-₹{expense}</Typography> */}
+              </CardContent>
+          </Card>
+      </Container>
           );
         };
