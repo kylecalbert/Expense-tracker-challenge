@@ -88,7 +88,7 @@ const NewTransactions = () => {
         sx={{
           marginTop: 4,
           display: 'flex',
-          flexDirection: 'column', // Change flexDirection to 'column'
+          flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -122,7 +122,7 @@ const NewTransactions = () => {
               label="Expense"
             />
           </RadioGroup>
-          {typeError && <Typography color="error">{typeError}</Typography>}
+          {typeError && <Typography color="error">{}</Typography>}
         </FormControl>
 
         <Button
