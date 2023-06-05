@@ -2,55 +2,42 @@ import React from 'react';
 import logo from './logo.svg';
 import { Box } from '@mui/material';
 import './App.css';
-import HistoryCardGrid from './components/HistoryCardGrid';
-import NewTransactions from './components/NewTransactions';
+import Login from './components/Login';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Outlet,
+  RouterProvider,
+} from 'react-router-dom';
 import { ExpenseTrackerProvider } from './components/TrackerProvider';
+import ExpenseTracker from './components/ExpenseTracker';
 
 function App() {
+  const handleFormSubmit = (loginData: any) => {
+    // Handle the form submit logic here
+    console.log(loginData);
+  };
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Root />}>
+        <Route index element={<Login onFormSubmit={handleFormSubmit} />} />
+        <Route path="/tracker" element={<ExpenseTracker />} />
+      </Route>
+    )
+  );
   return (
     <ExpenseTrackerProvider>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-        className="App"
-      >
-        <Box
-          sx={{
-            width: '80%',
-            maxWidth: 600,
-
-            marginBottom: '2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <HistoryCardGrid />
-        </Box>
-
-        <Box
-          sx={{
-            width: '80%',
-            maxWidth: 600,
-
-            marginTop: '2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <NewTransactions />
-        </Box>
-      </Box>
+      <RouterProvider router={router} />
     </ExpenseTrackerProvider>
   );
 }
 
+const Root = () => {
+  return (
+    <Box>
+      <Outlet />
+    </Box>
+  );
+};
 export default App;
