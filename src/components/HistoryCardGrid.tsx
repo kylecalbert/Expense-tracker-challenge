@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid, Box } from '@mui/material';
 import HistoryCards from './HistoryCards';
+import { ExpenseTrackerContext } from './TrackerProvider';
 const HistoryCardGrid = () => {
-  const cards = [
-    { id: 1, title: 'Camera', price: 10 },
-    { id: 2, title: 'Mobile phone', price: 30 },
-    { id: 3, title: 'Cake ', price: 30 },
-    { id: 3, title: 'Cash', price: 30 },
-    { id: 3, title: 'Cake ', price: 30 },
-    { id: 3, title: 'Cash', price: 30 },
-    { id: 3, title: 'Cake ', price: 30 },
-    { id: 3, title: 'Cash', price: 30 },
-  ];
+  const expenseContext = useContext(ExpenseTrackerContext);
+
+  if (!expenseContext) {
+    return null;
+  }
+
+  const { expenseTrackerStorage } = expenseContext;
+  const { storage } = expenseTrackerStorage;
 
   return (
     <Grid container spacing={1}>
-      {cards.map((card) => (
-        <Grid key={card.id} item lg={12}>
-          <HistoryCards id={card.id} title={card.title} price={card.price} />
+      {storage.map((card) => (
+        <Grid item lg={12}>
+          <HistoryCards title={card.title} amount={card.amount} />
         </Grid>
       ))}
     </Grid>

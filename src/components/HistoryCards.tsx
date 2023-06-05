@@ -3,11 +3,10 @@ import { Card, Box, CardContent, Typography } from '@mui/material';
 
 interface HistoryCardProps {
   title: string;
-  price: number;
-  id: number;
+  amount: string;
 }
 
-const HistoryCards: React.FC<HistoryCardProps> = ({ title, price, id }) => {
+const HistoryCards: React.FC<HistoryCardProps> = ({ title, amount }) => {
   return (
     <Card
       sx={{
@@ -35,7 +34,7 @@ const HistoryCards: React.FC<HistoryCardProps> = ({ title, price, id }) => {
       </CardContent>
       <CardContent sx={{ minWidth: '40px', textAlign: 'right' }}>
         <Typography variant="h6" sx={{ color: 'black' }}>
-          {price}
+          {amount}
         </Typography>
       </CardContent>
       <Box

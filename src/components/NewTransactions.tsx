@@ -31,10 +31,10 @@ const NewTransactions = () => {
 
   const handleAddTransaction = () => {
     if (!title || !amount || !type) {
-      // Checking if any of the required fields (title, amount, type) is missing
+      // Checking if any of the required fields title, amount, type is missing
       setExpenseTrackerErrors({
         ...expenseTrackerErrors,
-        titleError: title ? '' : 'Title is required',
+        titleError: title ? '' : 'Title is required', //if so, check if title has a value, if it doesnt then  add error message
         amountError: amount ? '' : 'Amount is required',
         typeError: type ? '' : 'Please select Income or Expense',
       });
@@ -56,6 +56,7 @@ const NewTransactions = () => {
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     if (inputValue === '' || /^\d+$/.test(inputValue)) {
+      ///if the amount is not a number  then dont allow the user to enter a value
       setExpenseTrackerData({ ...expenseTrackerData, amount: inputValue });
       setExpenseTrackerErrors({ ...expenseTrackerErrors, amountError: '' });
     }
@@ -133,7 +134,7 @@ const NewTransactions = () => {
               label="Expense"
             />
           </RadioGroup>
-          {typeError && <Typography color="error">{}</Typography>}
+          {typeError && <Typography color="error">{typeError}</Typography>}
         </FormControl>
 
         <Button
