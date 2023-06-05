@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container } from '@mui/material';
+import { TextField, Button, Container, Stack } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 interface LoginFormData {
   username: string;
@@ -16,6 +17,8 @@ interface LoginProps {
 }
 
 function Login({ onFormSubmit }: LoginProps) {
+  const navigate = useNavigate();
+
   const [loginData, setloginData] = useState<LoginFormData>({
     username: '',
     password: '',
@@ -27,7 +30,6 @@ function Login({ onFormSubmit }: LoginProps) {
   });
 
   const { username, password } = loginData;
-
   const { usernameError, passwordError } = loginError;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -43,8 +45,8 @@ function Login({ onFormSubmit }: LoginProps) {
     }
 
     onFormSubmit(loginData);
+    navigate('/tracker');
   };
-  ///try to split error and password/username
 
   return (
     <Container
@@ -62,67 +64,75 @@ function Login({ onFormSubmit }: LoginProps) {
           alignItems: 'center',
         }}
       >
-        <TextField
-          label="Username"
-          error={usernameError ? true : false}
-          helperText={usernameError}
-          inputProps={{ 'data-testid': 'username-textfield' }}
-          margin="normal"
-          variant="outlined"
-          value={username}
-          onChange={(e) => {
-            if (usernameError) {
-              setloginData({
-                ...loginData,
-                username: e.target.value,
-              });
-              setloginError({
-                ...loginError,
-                usernameError: '',
-              });
-            } else {
-              setloginData({ ...loginData, username: e.target.value });
-            }
-          }}
-          style={{ width: 300 }}
-        />
-        <TextField
-          error={passwordError ? true : false}
-          helperText={passwordError}
-          label="Password"
-          type="password"
-          margin="normal"
-          inputProps={{ 'data-testid': 'password-textfield' }}
-          variant="outlined"
-          value={password}
-          onChange={(e) => {
-            if (passwordError) {
-              setloginData({
-                ...loginData,
-                password: e.target.value,
-              });
-              setloginError({
-                ...loginError,
-                passwordError: '',
-              });
-            } else {
-              setloginData({ ...loginData, password: e.target.value });
-            }
-          }}
-          style={{ width: 300 }}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          data-testid="submit-button"
-        >
-          Submit
-        </Button>
+        <Stack spacing={2} style={{ width: 300 }}>
+          <TextField
+            label="Username"
+            error={usernameError ? true : false}
+            helperText={usernameError}
+            inputProps={{ 'data-testid': 'username-textfield' }}
+            margin="normal"
+            variant="outlined"
+            value={username}
+            onChange={(e) => {
+              if (usernameError) {
+                setloginData({
+                  ...loginData,
+                  username: e.target.value,
+                });
+                setloginError({
+                  ...loginError,
+                  usernameError: '',
+                });
+              } else {
+                setloginData({ ...loginData, username: e.target.value });
+              }
+            }}
+          />
+
+          <TextField
+            error={passwordError ? true : false}
+            helperText={passwordError}
+            label="Password"
+            type="password"
+            margin="normal"
+            inputProps={{ 'data-testid': 'password-textfield' }}
+            variant="outlined"
+            value={password}
+            onChange={(e) => {
+              if (passwordError) {
+                setloginData({
+                  ...loginData,
+                  password: e.target.value,
+                });
+                setloginError({
+                  ...loginError,
+                  passwordError: '',
+                });
+              } else {
+                setloginData({ ...loginData, password: e.target.value });
+              }
+            }}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            data-testid="submit-button"
+          >
+            Submit
+          </Button>
+
+          <Button
+            style={{ marginTop: 10 }}
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
+            Create Account
+          </Button>
+        </Stack>
       </form>
-      <Button style={{ marginTop: 10 }} variant="contained" color="primary">
-        Create Account
-      </Button>
     </Container>
   );
 }
