@@ -1,5 +1,7 @@
 import React from 'react';
-
+import { Header } from './header';
+import Balance from './balance';
+import { IncomeExpenses } from './incomeExpenses';
 import NewTransactions from './NewTransactions';
 import HistoryCardGrid from './HistoryCardGrid';
 import { Box } from '@mui/material';
@@ -9,21 +11,17 @@ const ExpenseTracker = () => {
     { amount: 100 },
     { amount: 50 }
   ]
+
   return (
-    <div className="App">
+
+    <Box>
         <Header/>
-        <Component>
       <Box>
         <Balance transactions = {transactions}/>
       </Box>
       <Box>
         <IncomeExpenses/>
       </Box>
-      </Component>
-  </div>
-);
-  return (
-    <Box>
       <Box
         sx={{
           display: 'flex',
