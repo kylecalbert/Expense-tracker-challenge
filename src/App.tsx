@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, CardContent, Typography } from '@mui/material';
 import {Header} from './components/header';
 import Balance from './components/balance';
+import {IncomeExpenses} from './components/incomeExpenses';
 import './App.css';
 
 function App() {
@@ -14,6 +15,9 @@ function App() {
         <Header/>
       <Box>
         <Balance transactions = {transactions}/>
+      </Box>
+      <Box>
+        <IncomeExpenses/>
       </Box>
   </div>
 );
