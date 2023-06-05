@@ -15,7 +15,6 @@ import ExpenseTracker from './components/ExpenseTracker';
 
 function App() {
   const handleFormSubmit = (loginData: any) => {
-    // Handle the form submit logic here
     console.log(loginData);
   };
   const router = createBrowserRouter(
