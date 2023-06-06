@@ -31,6 +31,9 @@ interface ExpenseContextData {
   >;
 }
 
+
+
+
 export const ExpenseTrackerContext = createContext<
   ExpenseContextData | undefined
 >(undefined);
@@ -55,6 +58,22 @@ export const ExpenseTrackerProvider: React.FC<{
     useState<expenseTrackerStorage>({
       storage: [],
     });
+
+    
+
+const expenseAmount = expenseTrackerStorage.storage.filter((transaction)=>transaction.type==='expense') //filers every transaction that has type expense   
+.map((transaction)=>parseInt(transaction.amount,10)) // this maps through each one and converts string values to a number
+.reduce((accumulator,amount) =>accumulator +amount,0); ///calculates the total expense
+ 
+
+const incomeAmount = expenseTrackerStorage.storage.filter((transaction)=>transaction.type==='income') 
+.map((transaction)=>parseInt(transaction.amount,10)) 
+.reduce((accumulator,amount) =>accumulator +amount,0);
+
+
+      
+
+    
 
   return (
     <ExpenseTrackerContext.Provider

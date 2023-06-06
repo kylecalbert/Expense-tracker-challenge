@@ -6,6 +6,21 @@ import NewTransactions from './NewTransactions';
 import HistoryCardGrid from './HistoryCardGrid';
 import { Box } from '@mui/material';
 
+
+// const Component = styled(Box)`
+//   background: #FFF;
+//   padding: 10px;
+//   border-radius: 20px;
+//   display: flex;
+//   width: 800px;
+//   & > div {
+//     padding: 10px;
+//     width: 50%;
+//     height: 70vh;
+//   }
+// }
+// `;
+
 const ExpenseTracker = () => {
   const transactions = [
     { amount: 100 },
