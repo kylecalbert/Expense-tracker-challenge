@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Grid } from '@mui/material';
 import HistoryCards from './HistoryCards';
 import { ExpenseTrackerContext } from './TrackerProvider';
+
 const HistoryCardGrid = () => {
   const expenseContext = useContext(ExpenseTrackerContext);
 
@@ -15,7 +16,7 @@ const HistoryCardGrid = () => {
   return (
     <Grid container spacing={1}>
       {storage.map((card) => (
-        <Grid item lg={12}>
+        <Grid item lg={12} sx={{ height: '80px' }}>
           <HistoryCards
             title={card.title}
             amount={card.amount}

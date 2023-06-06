@@ -16,6 +16,7 @@ const HistoryCards: React.FC<HistoryCardProps> = ({ title, amount, type }) => {
         backgroundColor: '#ffffff',
         display: 'flex',
         justifyContent: 'space-between',
+        border: '1px solid rgba(0, 0, 0, 0.1)',
       }}
     >
       <CardContent
