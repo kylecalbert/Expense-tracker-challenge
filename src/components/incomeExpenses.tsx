@@ -25,7 +25,7 @@ const Container = styled(Box)`
 
 
 
-   
+
 
 
 const expenseAmount = storage.filter((transaction)=>transaction.type==='expense') //filers every transaction that has type expense   

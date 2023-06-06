@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import { Typography, styled, Box, } from '@mui/material';
 import { ExpenseTrackerContext } from './TrackerProvider';
-import { IncomeExpenses } from './incomeExpenses';
 
 const BalanceText = styled(Typography)`
   font-size: 25px;
@@ -41,9 +40,17 @@ console.log(expenseAmount)
 
 const total = incomeAmount - expenseAmount
 
+
+let totalBalance = ` Balance: £${Math.abs(total)}` 
+if(total<0){
+  totalBalance = ` Balance: -£${Math.abs(total)}` 
+
+}
+
+
   return (
     <Box>
-      <BalanceText>Balance: {'£'+total}</BalanceText>
+      <BalanceText>{totalBalance}</BalanceText>
     </Box>
   );
 };

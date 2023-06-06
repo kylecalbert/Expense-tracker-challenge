@@ -7,19 +7,7 @@ import HistoryCardGrid from './HistoryCardGrid';
 import { Box } from '@mui/material';
 
 
-// const Component = styled(Box)`
-//   background: #FFF;
-//   padding: 10px;
-//   border-radius: 20px;
-//   display: flex;
-//   width: 800px;
-//   & > div {
-//     padding: 10px;
-//     width: 50%;
-//     height: 70vh;
-//   }
-// }
-// `;
+
 
 const ExpenseTracker = () => {
   const transactions = [
@@ -29,30 +17,32 @@ const ExpenseTracker = () => {
 
   return (
 
-    <Box>
+    
+    <Box sx={{ display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',}}>
+
+      <Box>
         <Header/>
+        </Box>
       <Box>
         <Balance transactions = {transactions}/>
       </Box>
-      <Box>
-        <IncomeExpenses/>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
+      <Box sx={{display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          height: '100vh',
-        }}
-        className="App"
-      >
+        }}>
+        <IncomeExpenses/>
+      </Box>
         <Box
           sx={{
             width: '80%',
             maxWidth: 600,
 
-            marginBottom: '2rem',
+            margin: '2rem',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -61,7 +51,6 @@ const ExpenseTracker = () => {
         >
           <HistoryCardGrid />
         </Box>
-
         <Box
           sx={{
             width: '80%',
@@ -76,7 +65,6 @@ const ExpenseTracker = () => {
         >
           <NewTransactions />
         </Box>
-      </Box>
     </Box>
   );
 };
