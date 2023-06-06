@@ -48,10 +48,9 @@ const NewTransactions = () => {
       storage: [...previousStorage.storage, expenseTrackerData],
     }));
 
-    alert('Transaction added successfully');
   };
 
-  console.log(expenseTrackerStorage);
+
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;

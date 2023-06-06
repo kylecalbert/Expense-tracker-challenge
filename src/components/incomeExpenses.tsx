@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Typography, Box, styled, Card, CardContent} from '@mui/material';
-// import { GlobalContext } from '../context/GlobalState';
+
+import { ExpenseTrackerContext } from './TrackerProvider';
+
 
 const Container = styled(Box)`
     display: flex;
@@ -9,48 +11,52 @@ const Container = styled(Box)`
         padding: 10px;
     }
 `;
-//Money formatter function
-function moneyFormatter(num: number): string {
-    let p = num.toFixed(2).split('.');
-    return (
-      '$ ' +
-      p[0]
-        .split('')
-        .reverse()
-        .reduce(function (acc, num, i, orig) {
-          return num === '-' ? acc : num + (i && !(i % 3) ? ',' : '') + acc;
-        }, '') +
-      '.' +
-      p[1]
-    );
-  }
   
   export const IncomeExpenses: React.FC = () => {
-    // const { transactions } = useContext(GlobalContext);
-  
-    // const amounts = transactions.map((transaction) => transaction.amount);
-  
-    // const income = amounts
-    //   .filter((item) => item > 0)
-    //   .reduce((acc, item) => (acc += item), 0);
-  
-    // const expense =
-    //   amounts
-    //     .filter((item) => item < 0)
-    //     .reduce((acc, item) => (acc += item), 0) * -1;
+    const expenseContext = useContext(ExpenseTrackerContext);
+    
+    if (!expenseContext) {
+      return null;
+    }
+
+   const  {expenseTrackerStorage}  = expenseContext;
+   const{storage} = expenseTrackerStorage;
+
+
+
+
+
+
+
+const expenseAmount = storage.filter((transaction)=>transaction.type==='expense') //filers every transaction that has type expense   
+.map((transaction)=>parseInt(transaction.amount,10)) // this maps through each one and converts string values to a number
+.reduce((accumulator,amount) =>accumulator +amount,0); ///calculates the total expense
+ 
+
+
+console.log(expenseAmount)
+
+
+
+const incomeAmount = storage.filter((transaction)=>transaction.type==='income') 
+.map((transaction)=>parseInt(transaction.amount,10)) 
+.reduce((accumulator,amount) =>accumulator +amount,0);
+
+console.log(incomeAmount)
+
   
         return (
           <Container>
           <Card>
               <CardContent>
                   <Typography>Income</Typography>
-                  {/* <Typography style={{ color: 'green' }}>+₹{income}</Typography> */}
+                  <Typography style={{ color: 'green' }}>+£{incomeAmount}</Typography>
               </CardContent>
           </Card>
           <Card>
               <CardContent>
                   <Typography>Expense</Typography>
-                  {/* <Typography style={{ color: 'red' }}>-₹{expense}</Typography> */}
+                  <Typography style={{ color: 'red' }}>-£{expenseAmount}</Typography>
               </CardContent>
           </Card>
       </Container>
