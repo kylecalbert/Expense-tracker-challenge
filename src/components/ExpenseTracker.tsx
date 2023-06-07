@@ -4,7 +4,7 @@ import Balance from './balance';
 import { IncomeExpenses } from './incomeExpenses';
 import NewTransactions from './NewTransactions';
 import HistoryCardGrid from './HistoryCardGrid';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 
 const ExpenseTracker = () => {
   const transactions = [{ amount: 100 }, { amount: 50 }];
@@ -19,7 +19,15 @@ const ExpenseTracker = () => {
         height: '100vh',
       }}
     >
-      <Box sx={{ width: '100%', textAlign: 'center' }}>
+      <Box
+        sx={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          width: '100%',
+          textAlign: 'center',
+        }}
+      >
         <Header />
       </Box>
       <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -32,31 +40,29 @@ const ExpenseTracker = () => {
           justifyContent: 'center',
           alignItems: 'center',
           width: '100%',
-          maxWidth: 600,
+          maxWidth: 400,
         }}
       >
         <IncomeExpenses />
       </Box>
       <Box
         sx={{
-          width: '100%',
-          maxWidth: 600,
-          marginTop: '6rem',
+          maxWidth: 400,
+          marginTop: '2rem',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
           alignItems: 'center',
           overflowY: 'auto',
-          height: 'auto',
         }}
       >
         <HistoryCardGrid />
       </Box>
       <Box
         sx={{
-          width: '100%', // Update width to '100%'
-          maxWidth: 600,
+          width: '100%',
+          maxWidth: 400,
           display: 'flex',
+          marginBottom: 20,
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
