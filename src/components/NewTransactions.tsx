@@ -47,10 +47,7 @@ const NewTransactions = () => {
       ...previousStorage,
       storage: [...previousStorage.storage, expenseTrackerData],
     }));
-
   };
-
-
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -62,7 +59,14 @@ const NewTransactions = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      <Typography
+        variant="h5"
+        sx={{ marginTop: '1rem', marginBottom: '1rem', fontWeight: 'bold' }}
+      >
+        Transactions
+      </Typography>
+
       <Typography>Enter the title</Typography>
       <TextField
         error={Boolean(titleError)}
@@ -79,7 +83,7 @@ const NewTransactions = () => {
           });
           setExpenseTrackerErrors({ ...expenseTrackerErrors, titleError: '' });
         }}
-        style={{ width: 500 }}
+        sx={{ width: '100%' }}
       />
 
       <Typography>Enter the amount</Typography>
@@ -92,7 +96,7 @@ const NewTransactions = () => {
         variant="outlined"
         value={amount}
         onChange={handleAmountChange}
-        style={{ width: 500 }}
+        sx={{ width: '100%' }}
       />
 
       <Box
